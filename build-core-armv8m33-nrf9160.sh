@@ -29,3 +29,8 @@ make -C "phoenix-rtos-kernel" $KERNEL_MAKECMDGOALS all
 
 # b_log "Building coreutils"
 # make -C "phoenix-rtos-utils" all
+
+# FIXME: compile host tools using host-pc target?
+b_log "Building hostutils"
+make -C "phoenix-rtos-hostutils" -f Makefile.old $CLEAN all
+cp "$PREFIX_BUILD_HOST/prog.stripped/phoenixd" "$PREFIX_BOOT"

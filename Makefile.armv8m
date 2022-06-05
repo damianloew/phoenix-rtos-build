@@ -25,8 +25,8 @@ endif
 
 ifeq ($(TARGET_SUBFAMILY), nrf9160)
 	RAM_SIZE=256
-	VADDR_KERNEL_INIT=0800d000  #TO_VERIFY
-	KERNEL_TARGET_DEFINE=-DCPU_STM32L4X6 -DNOMMU #TO_VERIFY
+	VADDR_KERNEL_INIT=20020000  #TO_VERIFY
+	KERNEL_TARGET_DEFINE=-DCPU_NRF9160 -DNOMMU #TO_VERIFY
 else
 	$(error Incorrect TARGET.)
 endif
@@ -36,7 +36,7 @@ LDFLAGS := -z max-page-size=0x10 --gc-sections
 
 ifeq ($(KERNEL), 1)
   CFLAGS += -DRAM_SIZE=$(RAM_SIZE) $(KERNEL_TARGET_DEFINE) -ffixed-r9
-  LDFLAGS += -Tbss=20000000 -Tdata=20000000
+  LDFLAGS += -Tbss=20030000 -Tdata=20030000
   STRIP = $(CROSS)strip
 else
   CFLAGS += -fpic -fpie -msingle-pic-base -mno-pic-data-is-text-relative
